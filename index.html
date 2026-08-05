@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloning web unilever</title>
+<style>
+  /* ====== 1. RESET & VARIABEL DASAR ====== */
+  :root{
+    --biru-unilever: #0066CC;   /* warna tema resmi dari meta-theme-color */
+    --biru-gelap: #041E42;      /* navy gelap khas footer situs korporat Unilever */
+    --bg-utama: #FFFFFF;        /* latar utama: putih bersih */
+    --bg-alt: #F5F7FA;          /* latar section selingan: putih kebiruan, BUKAN abu-abu polos */
+    --teks-utama: #0B1F33;      /* nyaris navy, bukan hitam pekat — kesan korporat */
+    --teks-sekunder: #4d5b6b;
+    --border: #e4e9ee;
+    --radius: 8px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  body{
+    font-family: Arial, "Helvetica Neue", "Segoe UI", sans-serif;
+    color: var(--teks-utama);
+    line-height: 1.65;
+    background: var(--bg-utama);
+  }
+
+  img{ max-width:100%; display:block; }
+  a{ color: var(--biru-unilever); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  ul{ list-style:none; }
+
+  .container{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ====== 2. HEADER ====== */
+  header.site-header{
+    border-bottom: 1px solid var(--border);
+    position: static;
+    background: #0066cc;
+    z-index: 100;
+  }
+
+  .header-bar{
+    display:flex;
+    flex-direction: row;
+    align-items:flex-start;
+    justify-content:space-between;
+    padding: 12px 24px 0;
+    gap: 32px;
+    margin: 0 auto;
+  }
+
+
+
+  .logo{
+    width: 180px;
+    max-width: 180px;
+    align-self: flex-start;
+    margin-top: 0;
+  }
+
+  .logo svg{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .strategi{
+    font-size: 1.9rem;
+    color: #ffffff;
+    padding: 8px 24px 16px;
+    margin: 0 auto;
+    margin-left: 200px;
+    margin-top:45px;
+  }
+
+  nav.main-nav ul{
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    gap: 45px;
+    margin-top: 20px;
+    margin-right: 25px;
+  }
+
+  nav.main-nav a{
+    color: #f3f7ff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    position: relative;
+    padding: 8px 0;
+    text-decoration: none;
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  nav.main-nav a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: rgba(255,255,255,0.95);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  nav.main-nav a:hover,
+  nav.main-nav a:focus{
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  nav.main-nav a:hover::after,
+  nav.main-nav a:focus::after{
+    transform: scaleX(1);
+  }
+
+  /* Breadcrumb */
+  .breadcrumb{
+    font-size: 0.85rem;
+    color: var(--teks-sekunder);
+    padding: 14px 0;
+  }
+  .breadcrumb a{ color: var(--teks-sekunder); }
+  .breadcrumb span{ margin: 0 6px; }
+
+  /* ====== 3. HERO ====== */
+  .hero{
+    padding: 40px 0 20px;
+  }
+  .hero h1{
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--teks-utama);
+  }
+
+  /* ====== 4. BLOK TEKS PEMBUKA ====== */
+  .intro{
+    padding: 20px 0 50px;
+    max-width: 760px;
+  }
+  .intro h2{
+    font-size: 1.6rem;
+    color: var(--biru-unilever);
+    margin-bottom: 16px;
+  }
+  .intro p{
+    color: var(--teks-sekunder);
+    margin-bottom: 16px;
+  }
+
+  /* ====== 5. SECTION DENGAN GAMBAR (selang-seling kiri/kanan) ====== */
+  .split-section{
+    display:flex;
+    align-items:center;
+    gap: 48px;
+    padding: 56px 0;
+    border-top: 1px solid var(--border);
+  }
+  .split-section.reverse{ flex-direction: row-reverse; }
+
+  .split-section .text{ flex: 1 1 50%; }
+  .split-section .media{ flex: 1 1 50%; }
+
+  .media-placeholder{
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: linear-gradient(160deg, #0B3E7A 0%, var(--biru-unilever) 55%, #4DA3FF 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size: 0.8rem;
+    text-align:center;
+    padding: 0;
+  }
+
+  .media-placeholder img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .split-section h3{
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+    color: var(--teks-utama);
+  }
+  .split-section h3 a{ color: inherit; }
+
+  .split-section p{
+    color: var(--teks-sekunder);
+    margin-bottom: 12px;
+  }
+  .split-section .tagline{
+    font-weight: 700;
+    color: var(--teks-utama);
+  }
+
+  .download-note{
+    font-size: 0.95rem;
+    padding: 8px 0 24px;
+  }
+
+  /* ====== 6. SECTION "LANGKAH STRATEGIS" (teks + 2 kartu) ====== */
+  .values-section{
+    padding: 60px 0;
+    border-top: 1px solid var(--border);
+    background: var(--bg-alt);
+  }
+  .values-section .intro-text{
+    max-width: 760px;
+    margin-bottom: 40px;
+  }
+  .values-section h2{
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+  .values-section p{ color: var(--teks-sekunder); margin-bottom: 14px; }
+
+  .card-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .card{
+    background:#fff;
+    border-radius: var(--radius);
+    overflow:hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 14px rgba(11,31,51,0.06);
+  }
+  .card .media-placeholder{ aspect-ratio: 16/9; border-radius:0; }
+  .card-body{ padding: 18px; }
+  .card-body h4{ font-size: 1.1rem; margin-bottom: 6px; }
+  .card-body p{ color: var(--teks-sekunder); font-size: 0.9rem; }
+
+  /* ====== 7. FOOTER ====== */
+  footer.site-footer{
+    background: var(--biru-gelap);
+    color: #cfe0f2;
+    padding: 56px 0 24px;
+    margin-top: 40px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .footer-grid h5{
+    color:#fff;
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+  .footer-grid a{
+    color: #cfe0f2;
+    display:block;
+    padding: 4px 0;
+    font-size: 0.9rem;
+  }
+  .footer-grid a:hover{ color:#fff; }
+
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap: 12px;
+    padding-top: 24px;
+    font-size: 0.8rem;
+    color: #8fa9c4;
+  }
+  .footer-legal a{ color:#8fa9c4; margin-right: 14px; }
+
+  /* ====== 8. RESPONSIF ====== */
+  @media (max-width: 768px){
+    nav.main-nav{ display:none; } /* pada situs asli akan berubah jadi menu hamburger */
+    .split-section, .split-section.reverse{
+      flex-direction: column;
+    }
+    .card-grid{ grid-template-columns: 1fr; }
+    .footer-grid{ grid-template-columns: 1fr; }
+    .hero h1{ font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <div class="header-bar">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 39" role="img" aria-label="Unilever logo">
+          <g clip-path="url(#a)">
+            <path fill="#fff" d="M72.235 33.844c1.539 0 4.214-.49 6.322-3.857-1.18-2.707-2.002-8.14-2.108-10.121C75.901 9.745 79.821.24 84.035.006c3.098-.17 5.564 2.813 5.816 7.607.674 12.615-3.498 17.857-5.606 22.374.338 1.768 3.266 4.774 6.07 4.794 1.031 0 2.275-.51 2.59-.937-.21-.724-.4-1.662-.4-3.026.042-7.309 4.74-13.445 8.766-13.423 3.203 0 5.036 4.303 5.014 7.137 0 3.346-2.824 6.03-6.974 8.63.716.725 2.044 1.257 3.203 1.278 5.879.043 9.019-7.138 11.337-13.722.421-1.258 1.159-3.026 2.592-3.004 2.487 0 3.413 16.514 7.522 16.534 1.77 0 3.224-3.643 3.246-6.455 0-2.088-.717-2.302-.695-5.328 0-3.344 1.79-6.136 4.172-6.136s1.96 1.47 1.938 3.24c-.042 6.69-4.867 19.07-11.885 19.027-5.268-.043-4.805-9.227-6.659-9.227s-5.015 9.27-15.236 9.205c-1.665 0-3.414-.852-4.847-2.535-2.487 1.661-4.551 2.386-6.933 2.365-3.814 0-5.436-4.006-6.996-4.006s-3.941 4.048-10.157 4.006c-4.953 0-5.732-6.712-7.502-6.734-1.56 0-3.963 6.648-6.554 6.627-4.342 0-5.184-11.613-9.02-11.634-2.992 0-12.538 11.697-15.087 11.399-1.032-.107-1.454-.895-1.35-1.94.148-1.449 1.412-5.305 1.919-7.137.864-3.176 1.643-6.648 2.086-7.756.421-1.108 1.58-1.918 2.507-1.811.464.042.59.916.737 1.64.506 2.579 1.222 5.221 2.045 5.221 1.453 0 6.3-9.247 9.082-9.227 3.414 0 3.73 14.639 8.366 14.682 1.56 0 2.698-1.854 3.751-4.155.127-3.878 1.202-9.376 4.299-9.354 2.17 0 3.182 4.921 1.601 9.205-.022 5.113 3.266 6.392 5.436 6.392m82.674-11.974c-1.306 5.37-5.247 13.232-11.021 13.19-1.35 0-3.709-.554-3.709-1.897s9.103-1.598 9.145-8.608c0-2.6-2.34-6.286-5.837-6.308-4.636 0-9.209 5.07-9.251 12.166-.042 6.371 3.856 8.48 7.775 8.502 6.828.043 10.98-5.561 13.17-10.248C156.187 31.777 156.756 39 159.348 39s1.77-.511 3.014-3.324c3.14-6.989 6.174-15 10.304-14.98 1.539 0 .611 2.834 4.32 2.856 1.749 0 2.992-1.45 3.014-3.133 0-2.408-2.128-4.283-5.436-4.304-9.714-.064-11.864 14.639-13.403 14.639-2.591 0-1.685-11.805-3.54-11.826-1.643 0-2.487 1.982-2.697 2.898m-68.444-11.4c-.168-2.918-.842-4.24-2.402-4.154-2.064.107-3.056 6.648-2.676 13.53.231 4.496.884 5.178 1.517 5.136 1.138-.064 3.919-8.054 3.561-14.532M69.727 4.183C69.601 2.5 68.294 1.35 66.545 1.35S62.731 3.394 62.9 6.016c.106 1.726 1.116 3.153 3.077 3.153s3.94-2.578 3.729-4.986m32.01 21.5c0-1.768-.906-3.24-2.044-3.24s-3.098 1.024-3.119 4.369c0 2.62.906 3.857 1.306 4.41 2.993-.916 3.835-3.43 3.857-5.518m40.395-3.303c2.17 0 2.781 2.62 2.254 4.177s-2.402 3.324-5.289 3.835c-.611-1.577-.885-8.034 3.034-8.012M23.262 14.22c-.295-.96-1.138-3.09-1.37-4.667-.484-3.495 1.328-5.775 2.971-6.286 1.855-.511 2.592.426 3.288 2.642.906 3.345.99 7.735.633 14-.464 8.565-4.763 18.879-15.3 18.58C4.403 38.233.42 32.246.04 23.169-.128 18.884.187 14.602 2 8.571c.948-3.24 1.79-4.39 4.678-4.986 2.275-.405 2.044 1.982 1.517 4.816-1.16 6.244-1.707 9.27-1.35 16.386.358 7.522 3.752 10.463 7.481 10.485 5.584.149 8.07-4.539 9.167-11.315.864-5.412.253-8.033-.253-9.695"/>
+          </g>
+          <defs>
+            <clipPath id="a">
+              <path fill="#fff" d="M0 0h180v39H0z"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#">Perusahaan kami</a></li>
+          <li><a href="#">Brand kami</a></li>
+          <li><a href="#">Keberlanjutan</a></li>
+          <li><a href="#">Berita</a></li>
+          <li><a href="#">Investor</a></li>
+          <li><a href="#">Karir</a></li>
+        </ul>
+      </nav>
+    </div>
+    <h1 class="strategi">Strategi Kami</h1>
+  </header>
+
+  <main class="container">
+
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      
+    </section>
+
+    <!-- ========== INTRO: BISNIS YANG BERKELANJUTAN ========== -->
+    <section class="intro">
+      <h2>Bisnis yang berkelanjutan</h2>
+      <p>Pada tahun 1883, Sabun Sunlight diperkenalkan di UK oleh pendiri kami – pada masa itu kehadirannya sangatlah terdepan dan sangat inovatif, dan kehadirannya memiliki purpose atau tujuan mulia yang kuat: menjadikan kebersihan sesuatu yang bisa dimiliki oleh semua orang, tanpa terkecuali. Saat ini kami memiliki 400 brand terkemuka di dunia, dan kami tetap menjadikan purpose atau tujuan mulia sebagai jantung dari bisnis kami.</p>
+      <p>Kami ingin membawa lebih banyak lagi kebaikan bagi planet dan masyarakat. Kami ingin turut berbagi peran dalam membantu menangani masalah sosial dan lingkungan yang ada di dunia, sembari kami meningkatkan kesehatan dan kesejahteraan masyarakat melalui produk-produk kami.</p>
+      <p>Kami telah menjadi yang terdepan dalam bisnis, menciptakan sejumlah inovasi selama lebih dari 120 tahun, dan kami akan terus melakukan hal tersebut dan terus menemani masyarakat untuk waktu yang panjang. Dan kami berkomitmen melakukan hal tersebut secara bertanggung jawab dan berkelanjutan.</p>
+    </section>
+
+    <!-- ========== KARTU: SEJARAH KAMI ========== -->
+    <section class="split-section">
+      <div class="media">
+        <div class="media-placeholder"><img src="sejarah kami.jpg" alt="Sejarah kami" /></div>
+      </div>
+      <div class="text">
+        <h3><a href="#">Sejarah kami</a></h3>
+        <p>Temukan cerita lebih lengkap mengenai perjalanan kami di Indonesia.</p>
+      </div>
+    </section>
+
+    <!-- ========== INTRO STRATEGI (5 LANGKAH) ========== -->
+    <section class="intro">
+      <h2>Strategi Kami</h2>
+      <p>Ambisi kami adalah menjadi pemimpin di pasar global dalam hal menciptakan bisnis yang berkelanjutan; yang berlandaskan tujuan mulia (purpose-led) dan mampu bersaing dimasa depan (future-fit).</p>
+      <p>Untuk mencapai hal tersebut, ada lima langkah strategis yang kami miliki.</p>
+      <p class="download-note"><strong>Anda bisa mengunduh: <a href="#">our compass strategy (PDF 501.03 KB)</a></strong></p>
+    </section>
+
+    <!-- ========== 5 PILAR STRATEGI (selang-seling) ========== -->
+
+    <section class="split-section">
+      <div class="media"><div class="media-placeholder"><img src="anak cuci tangan.jpg" alt="Anak-anak berlatih mencuci tangan" /></div></div>
+      <div class="text">
+        <h3>Mengembangkan portfolio yang berpotensi mendorong pertumbuhan yang tinggi</h3>
+        <p>Kami berfokus pada kebersihan, perawatan tubuh, produk kecantikan premium, makanan yang berbasis nabati dan nutrisi yang bermanfaat seperti vitamin, mineral dan suplemen.</p>
+        <p class="tagline">Beradaptasi dengan perubahan masyarakat dan seleranya terhadap makanan.</p>
+      </div>
+    </section>
+
+    <section class="split-section reverse">
+      <div class="media"><div class="media-placeholder"><img src="Brand sebagai sumber kebaikan.jpg" alt="Brand sebagai sumber kebaikan" /></div></div>
+      <div class="text">
+        <h3>Brand yang terdepan menjadi sumber kebaikan</h3>
+        <p>Kami ingin meningkatkan kesehatan planet dan masyarakat. Kami juga ingin meningkatkan kepercayaan diri dan kesejahteraan masyarakat sembari berkontribusi untuk menciptakan lingkungan yang lebih toleran, adil dan inklusif.</p>
+        <p class="tagline">Diperkuat oleh tujuan mulia dan inovasi.</p>
+      </div>
+    </section>
+
+    <section class="split-section">
+      <div class="media"><div class="media-placeholder"><img src="Pasar utama.jpg" alt="Pasar utama: USA, India, China" /></div></div>
+      <div class="text">
+        <h3>Mengembangkan bisnis di pasar USA, India, China dan market utama lainnya</h3>
+        <p>Kami akan mengembangkan bisnis kami di USA, India dan China, sembari kami juga membesarkan skala bisnis kami di market utama lainnya.</p>
+        <p class="tagline">Memperkuat keberadaan kami di negara berkembang.</p>
+      </div>
+    </section>
+
+    <section class="split-section reverse">
+      <div class="media"><div class="media-placeholder"><img src="Penjaga toko menimbang barang di toko kelontong.jpg" alt="Penjaga toko menimbang barang di toko kelontong" /></div></div>
+      <div class="text">
+        <h3>Memimpin dalam kanal penjualan masa depan</h3>
+        <p>Kami sedang mengembangkan bisnis kami di eCommerce dan juga terus berupaya mengembangkan eB2B platforms yang baru, kami juga sedang mendorong kepemimpinan kami dengan menerapkan pengetahuan kami dalam memahami konsumen kami.</p>
+        <p class="tagline">Mengembangkan cara yang inovatif untuk menjangkau konsumen kami.</p>
+      </div>
+    </section>
+
+    <section class="split-section">
+      <div class="media"><div class="media-placeholder"><img src="Organisasi purpose-led & future-fit.jpg" alt="Organisasi purpose-led & future-fit" /></div></div>
+      <div class="text">
+        <h3>Membangun organisasi yang purpose-led (berpegang pada tujuan mulia) dan future-fit (mampu bersaing dimasa depan)</h3>
+        <p>Kami fokus untuk mengembangkan kapabilitas yang tangkas, melakukan transformasi digital, serta mengembangkan karyawan kami dengan membekali pengetahuan secara terus-menerus yang bisa diaplikasikan secara jangka panjang.</p>
+        <p class="tagline">Membangun budaya kerja yang ingin terus maju dan berkelanjutan.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== LANGKAH STRATEGIS KAMI, PENDORONG LANGKAH KAMI ========== -->
+  <section class="values-section">
+    <div class="container">
+      <div class="intro-text">
+        <h2>Langkah strategis kami, pendorong langkah kami</h2>
+        <p>Value atau nilai yang kami pegang menentukan bagaimana kami berbisnis, yaitu bisnis yang berintegritas.</p>
+        <p>Kami berharap semua karyawan Unilever menjadi duta kami dalam hal menerapkan standar tinggi etika kami.</p>
+        <p>Kami ingin menciptakan lingkungan kerja dimana karyawan tidak hanya menjalankan nilai yang kami terapkan dalam pekerjaan; nilai integritas, rasa hormat, tanggung jawab dan perintis, tetapi kami mendorong karyawan waspada dalam mengidentifikasi potensi masalah, dan percaya diri untuk berbicara dan bertindak dengan cara yang berintegritas terlepas dalam situasi apapun.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="media-placeholder"><img src="integritas bisnis.jpg" alt="Integritas bisnis" /></div>
+          <div class="card-body">
+            <h4><a href="#">Integritas bisnis di Unilever</a></h4>
+            <p>Bagaimana kami berbisnis</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="media-placeholder"><img src="Prinsip bisnis (PDF).jpg" alt="Prinsip bisnis" /></div>
+          <div class="card-body">
+            <h4><a href="#">Unduh prinsip bisnis kami (PDF 1.41 MB)</a></h4>
+            <p>Standar bisnis kami</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h5>Bagikan halaman ini</h5>
+          <a href="#">Facebook</a>
+          <a href="#">X</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">E-mail</a>
+        </div>
+        <div>
+          <h5>Terhubung dengan kami</h5>
+          <a href="#">Facebook</a>
+          <a href="#">X</a>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">YouTube</a>
+        </div>
+        <div>
+          <h5>Kontak Kami</h5>
+          <a href="#">Hubungi Unilever Indonesia</a>
+          <a href="#">Catatan Legal</a>
+          <a href="#">Pemberitahuan Privasi</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Unilever Indonesia &nbsp;|&nbsp; © Unilever 2026</span>
+        <div class="footer-legal">
+          <a href="#">Aksesibilitas</a>
+          <a href="#">Keberlanjutan Digital</a>
+          <a href="#">Pemberitahuan Cookie</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
